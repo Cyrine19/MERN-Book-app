@@ -53,7 +53,7 @@ usersRoute.post('/login',
 
 
 //update user 
-usersRoute.put('/update', (req, res) =>{
+usersRoute.put('/update', authMiddleware,(req, res) =>{
     res.send('Update Route') ;
 });
 
@@ -64,6 +64,6 @@ usersRoute.delete ('/:id', (req, res) => {
 //fetch Users
 usersRoute.get('/', authMiddleware,(req ,res)=>{
     console.log(req.headers);
-    res.send('Fetch users');
+    res.send(req.user);
 });
 module.exports = usersRoute ;
