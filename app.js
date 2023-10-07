@@ -5,6 +5,7 @@ const userRoute = require ('./routes/usersRoutes.js');
 const dbConnect =require ('./Config/dbConnect.js');
 const usersRoute = require('./routes/usersRoutes.js');
 const bookRouter = require('./routes/booksRoute.js');
+const cors = require('cors');
 dotenv.config();
 const app = express();
 
@@ -22,7 +23,8 @@ console.log((process.env.MY_NAME));
 //Error middleware
 app.use (error.errorMiddlewareHandler);
 
-
+//enable CORS
+app.use(cors());
 
 //Server
 const PORT = process.env.PORT || 5001;

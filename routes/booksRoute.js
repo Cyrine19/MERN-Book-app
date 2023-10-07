@@ -1,11 +1,23 @@
 const express = require ('express');
 const expressAsyncHandler = require ('express-async-handler');
 const Book = require ('../models/Book');
-
+const authMiddleware = require ('../middlewares/authMiddleware');
 const bookRouter = express.Router ();
 
 
 //Create Book 
+bookRouter.post ('/', expressAsyncHandler(async(req, res) => {
+    const book = await Book.create(req.body);
+    if (book){
+        res.status (200);
+        res.json(book)
+    }else {
+        res.status (500);
+        throw new Error ('Book creating failed');
+    }
+})
+);
+
 bookRouter.get('/', expressAsyncHandler(async(req, res) => {
 const book =  await Book.find({});
 
@@ -18,11 +30,14 @@ if (book){
 }
 })
 );
+
+
 bookRouter.put('/:id' ,
- expressAsyncHandler(async(req, res) => {
+ authMiddleware, expressAsyncHandler(async(req, res) => {
     const book = await Book.findByIdAndUpdate (req.params.id);
+
     if (book){
-        const updatedBook= await Book.findByIdAndUpdate(
+        const updatedBook = await Book.findByIdAndUpdate(
             req.params.id,
             req.body,
             {
@@ -33,7 +48,7 @@ bookRouter.put('/:id' ,
         res.status(200);
         res.json (updatedBook);
     } else {
-        res.status(500).send ({message:'The id is not valid'})
+        res.status(500) ;
         throw new Error ('Update failed');
 
     }

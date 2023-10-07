@@ -1,11 +1,12 @@
-const mongoose = require ('mongoose');
+const mongoose = require ('mongoose') ;
+const User = require ('../models/User');
 
 const bookSchema = new mongoose.Schema({
     category:{
         type: String,
         required: [true, 'Book category is reguired ']
     },
-     author: {
+    author: {
         type :String ,
         required:[ true,'Author name is required']
 

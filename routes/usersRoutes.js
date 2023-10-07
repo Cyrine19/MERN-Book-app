@@ -22,7 +22,7 @@ usersRoute.post (
             name  : userCreated.name ,
             password:userCreated.password,
             email: userCreated.password,
-            token: generateToken(userCreated._id),
+            token: generateToken (userCreated._id),
         });
     })
     );
