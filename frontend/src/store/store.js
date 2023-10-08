@@ -11,6 +11,13 @@ const reducer = combineReducers({
     bookList: bookListReducer,
     userLogin: userReducer,
 });
+//GET USER FROM LOCALSTORAGE AND SAVE IT INTO OUR STORE 
+const userAuthFromStorage = localStorage.getItem('userAuthData')
+    ? JSON.parse(localStorage.getItem('userAuthData'))
+    :null;
+const initialState = {
+    userLogin:{ userInfo: userAuthFromStorage},   
+};
 
 const store = configureStore({
     reducer: createBookReducer,

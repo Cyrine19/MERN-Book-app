@@ -7,10 +7,12 @@ const usersRoute = require('./routes/usersRoutes.js');
 const bookRouter = require('./routes/booksRoute.js');
 const cors = require('cors');
 dotenv.config();
+
+
 const app = express();
 
 //Db connect 
-dbConnect();
+
 //Passing body data
 app.use(express.json ());
 
@@ -19,7 +21,7 @@ app.use(express.json ());
 app.use('/api/users', usersRoute);
 //Books 
 app.use('/api/books', bookRouter);
-console.log((process.env.MY_NAME));
+
 //Error middleware
 app.use (error.errorMiddlewareHandler);
 

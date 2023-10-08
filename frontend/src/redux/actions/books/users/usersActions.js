@@ -6,11 +6,11 @@ const registerUserAction = (name, email, password) => {
         try{
             dispatch ({
                 type: USER_REGISTER_REQUEST
-            })
+            });
             //MAKE ACTUALL CALL
             const config = {
                 Headers:{
-                    'Content-Type':'appliactaion/json',
+                    'Content-Type':'application/json',
                 },
             };
             const { data }= await axios.post('/api/users/register',
